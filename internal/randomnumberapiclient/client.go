@@ -9,8 +9,17 @@ import (
 
 const apiURL = "https://www.randomnumberapi.com/api/v1.0/"
 
+func GetRandomRedditNumber() (int, error) {
+	url := apiURL + "randomredditnumber"
+	return getRandom(url)
+}
 func GetRandomNumber() (int, error) {
 	url := apiURL + "random"
+	return getRandom(url)
+}
+
+func getRandom(url string) (int, error) {
+
 	var client http.Client
 	client.Get(url)
 	resp, err := client.Get(url)
