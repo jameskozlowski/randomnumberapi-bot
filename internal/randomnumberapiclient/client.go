@@ -23,7 +23,6 @@ func GetRandomNumber(min int, max int) (int, error) {
 func getRandom(url string) (int, error) {
 
 	var client http.Client
-	client.Get(url)
 	resp, err := client.Get(url)
 	if err != nil {
 		return 0, errors.New("error connecting to url to retrieve random number")

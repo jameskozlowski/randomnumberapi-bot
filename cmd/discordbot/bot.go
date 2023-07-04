@@ -26,7 +26,10 @@ func (bot *RandomnumberapiDiscordBot) Run() {
 	discord.AddHandler(bot.newMessage)
 
 	// Open session
-	discord.Open()
+	err = discord.Open()
+	if err != nil {
+		log.Fatal(err)
+	}
 	defer discord.Close()
 
 	// Run until terminated
