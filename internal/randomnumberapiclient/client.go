@@ -5,16 +5,18 @@ import (
 	"errors"
 	"io"
 	"net/http"
+	"strconv"
 )
 
-const apiURL = "https://www.randomnumberapi.com/api/v1.0/"
+const apiBaseURL = "https://www.randomnumberapi.com/api/v1.0/"
 
-func GetRandomRedditNumber() (int, error) {
-	url := apiURL + "randomredditnumber"
+func GetRandomRedditNumber(min int, max int) (int, error) {
+	url := apiBaseURL + "randomredditnumber?min=" + strconv.Itoa(min) + "&max=" + strconv.Itoa(max)
 	return getRandom(url)
 }
-func GetRandomNumber() (int, error) {
-	url := apiURL + "random"
+
+func GetRandomNumber(min int, max int) (int, error) {
+	url := apiBaseURL + "random?min=" + strconv.Itoa(min) + "&max=" + strconv.Itoa(max)
 	return getRandom(url)
 }
 
@@ -24,7 +26,6 @@ func getRandom(url string) (int, error) {
 	client.Get(url)
 	resp, err := client.Get(url)
 	if err != nil {
-
 		return 0, errors.New("error connecting to url to retrieve random number")
 	}
 	defer resp.Body.Close()
